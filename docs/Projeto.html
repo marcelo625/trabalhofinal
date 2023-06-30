@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>PROJETO MARCELO - Projeto Acidovorax Phage</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">PROJETO MARCELO</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Projeto.html" aria-current="page">
+ <span class="menu-text">Projeto Acidovorax Phage</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#detecção-de-profagos-no-genoma-da-bactéria" id="toc-detecção-de-profagos-no-genoma-da-bactéria" class="nav-link active" data-scroll-target="#detecção-de-profagos-no-genoma-da-bactéria">Detecção de profagos no genoma da bactéria</a></li>
+  <li><a href="#diferença-no-conteúdo-gc" id="toc-diferença-no-conteúdo-gc" class="nav-link" data-scroll-target="#diferença-no-conteúdo-gc">DIFERENÇA NO CONTEÚDO GC</a></li>
+  <li><a href="#tamanho-dos-elementos-semelhantes-a-fagos" id="toc-tamanho-dos-elementos-semelhantes-a-fagos" class="nav-link" data-scroll-target="#tamanho-dos-elementos-semelhantes-a-fagos">Tamanho dos Elementos semelhantes a fagos</a>
+  <ul class="collapse">
+  <li><a href="#histograma-de-distribuição" id="toc-histograma-de-distribuição" class="nav-link" data-scroll-target="#histograma-de-distribuição">Histograma de distribuição</a></li>
+  </ul></li>
+  <li><a href="#boxplot-tamanho-x-integridade" id="toc-boxplot-tamanho-x-integridade" class="nav-link" data-scroll-target="#boxplot-tamanho-x-integridade">Boxplot tamanho x Integridade</a>
+  <ul class="collapse">
+  <li><a href="#influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli" id="toc-influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli" class="nav-link" data-scroll-target="#influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli">Influência de profagos na evolução do genoma de Acidovorax citrulli</a></li>
+  </ul></li>
+  <li><a href="#manipulação-de-dados-para-a-correlação" id="toc-manipulação-de-dados-para-a-correlação" class="nav-link" data-scroll-target="#manipulação-de-dados-para-a-correlação">Manipulação de dados para a Correlação</a></li>
+  <li><a href="#correlação-de-pearson" id="toc-correlação-de-pearson" class="nav-link" data-scroll-target="#correlação-de-pearson">Correlação de Pearson</a>
+  <ul class="collapse">
+  <li><a href="#análise-exploratória" id="toc-análise-exploratória" class="nav-link" data-scroll-target="#análise-exploratória">Análise exploratória</a></li>
+  </ul></li>
+  <li><a href="#testando-a-normalidade" id="toc-testando-a-normalidade" class="nav-link" data-scroll-target="#testando-a-normalidade">Testando a normalidade</a></li>
+  <li><a href="#testanto-homocedasticidade" id="toc-testanto-homocedasticidade" class="nav-link" data-scroll-target="#testanto-homocedasticidade">Testanto Homocedasticidade</a></li>
+  <li><a href="#spearman---correlação" id="toc-spearman---correlação" class="nav-link" data-scroll-target="#spearman---correlação">Spearman - Correlação</a></li>
+  <li><a href="#spearman---coeficiente-de-determinação-de" id="toc-spearman---coeficiente-de-determinação-de" class="nav-link" data-scroll-target="#spearman---coeficiente-de-determinação-de">Spearman - Coeficiente de determinação de</a></li>
+  <li><a href="#regressão-linear-correlação-de-spearman" id="toc-regressão-linear-correlação-de-spearman" class="nav-link" data-scroll-target="#regressão-linear-correlação-de-spearman">Regressão linear + Correlação de Spearman</a></li>
+  <li><a href="#teste-t" id="toc-teste-t" class="nav-link" data-scroll-target="#teste-t">Teste T</a></li>
+  <li><a href="#homocedasticidade" id="toc-homocedasticidade" class="nav-link" data-scroll-target="#homocedasticidade">Homocedasticidade</a></li>
+  <li><a href="#testando-normalidade" id="toc-testando-normalidade" class="nav-link" data-scroll-target="#testando-normalidade">Testando normalidade</a></li>
+  <li><a href="#teste-de-mann-whitney" id="toc-teste-de-mann-whitney" class="nav-link" data-scroll-target="#teste-de-mann-whitney">Teste de Mann-Whitney</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projeto Acidovorax Phage</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="detecção-de-profagos-no-genoma-da-bactéria" class="level2">
+<h2 class="anchored" data-anchor-id="detecção-de-profagos-no-genoma-da-bactéria">Detecção de profagos no genoma da bactéria</h2>
+<p>Primeiro vamos carregar todas as bibliotecas que vamos usar nesse trabalho</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-1_7bb192974d6c99ba0b1a11fac8cb3a12">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(report)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DHARMa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Vamos criar um gráfico de barras empilhado para demonstrar a detecção de profagos em cada isolado e a sua classificação de integridade.</p>
+<p>Aqui, nós vamos carregar um data frame e vamos chamá-lo de df1. E logo após, nós vamos editar uma tabela do formato larga para o formato longo. Assim, juntando as variáveis Intact, questionable e incoomplete em uma única variável chamada classification</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-2_4829d598b61eec4da7e994d2d79ca297">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>classification <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Dataset_Acc.xlsx"</span>, <span class="st">"classification"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> classification <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> intact<span class="sc">:</span>incomplete,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"classification"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>stacked_bar</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-3_2049b0b733084bf86fac454d9ea5917e">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Aqui eu vou definir manualmente a ordem dos isolados que eu quero que apareça</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>strain <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>strain, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ZJU110"</span>, <span class="st">"M6"</span>, <span class="st">"DSM 17060"</span>, <span class="st">"NWB SC107"</span>, <span class="st">"NWB SC196"</span>,<span class="st">"HPP21-3-3B"</span>, <span class="st">"HPP21-9-4B"</span>,  <span class="st">"pslb65"</span>, <span class="st">"CCRM AcMP2"</span>, <span class="st">"tw6"</span>, <span class="st">"AAC00-1 #5593"</span>, <span class="st">"AAC00-1 #5596"</span>, <span class="st">"AAC00-1 #5684"</span>, <span class="st">"AAC00-1"</span>, <span class="st">"KACC17005"</span>, <span class="st">"T1"</span>, <span class="st">"NWB SC074"</span>, <span class="st">"EP"</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Converter a coluna "classification" em uma variável nessa ordem específica</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>classification <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>classification, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"incomplete"</span>, <span class="st">"questionable"</span>, <span class="st">"intact"</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Agora vou criar um gráfico de barras empilhadas</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> classification, <span class="at">y =</span> strain, <span class="at">x =</span> value)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"stack"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Integrity"</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">" "</span>, <span class="at">x =</span> <span class="st">"Number of Prophage-like Region per Genome"</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">incomplete =</span> <span class="st">"#F8766D"</span>, <span class="at">questionable =</span> <span class="st">"#8494FF"</span>, <span class="at">intact =</span> <span class="st">"#00BE67"</span>)) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="diferença-no-conteúdo-gc" class="level1">
+<h1>DIFERENÇA NO CONTEÚDO GC</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-4_c0e45445c2caa625e92e08abf8a3bf82">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phages <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Dataset_Acc.xlsx"</span>, <span class="dv">3</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bac <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Dataset_Acc.xlsx"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>bac<span class="sc">$</span><span class="st">`</span><span class="at">GC(%)</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(bac<span class="sc">$</span><span class="st">`</span><span class="at">GC(%)</span><span class="st">`</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>phages<span class="sc">$</span>gc_phage <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(phages<span class="sc">$</span>gc_phage)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>phages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 120 × 12
+    `N°` strain group `Access number` Prophage-like elemen…¹ `Contig (location)`
+   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                            &lt;dbl&gt; &lt;chr&gt;              
+ 1     1 AAC00… grup… NC_008752                            1 1 (557260-569777 ) 
+ 2     2 AAC00… grup… &lt;NA&gt;                                 2 1 (757777-768236)  
+ 3     3 AAC00… grup… &lt;NA&gt;                                 3 1 (1757298-1802907)
+ 4     4 AAC00… grup… &lt;NA&gt;                                 4 1 (1845873-1866259)
+ 5     5 AAC00… grup… &lt;NA&gt;                                 5 1 (1877991-1906636)
+ 6     6 AAC00… grup… &lt;NA&gt;                                 6 1 (1907029-1944343)
+ 7     7 AAC00… grup… &lt;NA&gt;                                 7 1 (2571459-2628861)
+ 8     8 AAC00… grup… &lt;NA&gt;                                 8 1 (3700345-3708165)
+ 9     9 AAC00… grup… &lt;NA&gt;                                 9 1 (3719583-3742692)
+10    10 AAC00… grup… &lt;NA&gt;                                10 1 (4568376-4585713)
+# ℹ 110 more rows
+# ℹ abbreviated name: ¹​`Prophage-like elements`
+# ℹ 6 more variables: size_phage &lt;chr&gt;, per_genome &lt;chr&gt;, t_gen &lt;chr&gt;,
+#   classification &lt;chr&gt;, gc_phage &lt;dbl&gt;, CDS &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> phages,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(gc_phage, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> <span class="st">"Prophage-like elements"</span>)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> bac, <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(bac<span class="sc">$</span><span class="st">`</span><span class="at">GC(%)</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">"Acidovorax citrulli"</span>))<span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"GC content(%)"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">" "</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Acidovorax citrulli'</span> <span class="ot">=</span> <span class="st">"#8494FF"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Prophage-like elements'</span> <span class="ot">=</span> <span class="st">"#FF6666"</span>)) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="tamanho-dos-elementos-semelhantes-a-fagos" class="level1">
+<h1>Tamanho dos Elementos semelhantes a fagos</h1>
+<p>Agora eu vou criar um gráfico mostrando a distribuição do tamanho das sequências semelhantes a fagos, com as informações da aba 3</p>
+<section id="histograma-de-distribuição" class="level2">
+<h2 class="anchored" data-anchor-id="histograma-de-distribuição">Histograma de distribuição</h2>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-5_3dc950f2eefcdfe7f09ee840331b4951">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Algum problema ocorreu e o dataframe mostra que a variável size_phage que representa o tamanho dessas sequências não eram valores numéricos. Então eu usei a função as.numeric para torná-la numérica.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>phages<span class="sc">$</span>size_phage <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(phages<span class="sc">$</span>size_phage)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>p_szclass <span class="ot">&lt;-</span> phages <span class="sc">|&gt;</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(size_phage, classification)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>p_szclass <span class="sc">|&gt;</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(size_phage)) <span class="sc">+</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"#8494FF"</span>)<span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Classification"</span>) <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Number of Prophage-like elements"</span>, <span class="at">x =</span> <span class="st">"Size of prophage-like elements (Kb)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="boxplot-tamanho-x-integridade" class="level1">
+<h1>Boxplot tamanho x Integridade</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-6_1f589405e0e31ebbec3977eaadb82be4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Definindo a ordem dos Boxplot que eu quero que apareça</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p_szclass<span class="sc">$</span>classification <span class="ot">&lt;-</span> <span class="fu">factor</span>(p_szclass<span class="sc">$</span>classification, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"intact"</span>,  <span class="st">"questionable"</span>, <span class="st">"incomplete"</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#BOXPLOT</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>p_szclass <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(classification, size_phage, <span class="at">fill =</span> classification)) <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Size of prophage-like elements (Kb)"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">" "</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Integrity"</span>) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">incomplete =</span> <span class="st">"#F8766D"</span>, <span class="at">questionable =</span> <span class="st">"#8494FF"</span>, <span class="at">intact =</span> <span class="st">"#00BE67"</span>)) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli" class="level2">
+<h2 class="anchored" data-anchor-id="influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli">Influência de profagos na evolução do genoma de Acidovorax citrulli</h2>
+</section>
+</section>
+<section id="manipulação-de-dados-para-a-correlação" class="level1">
+<h1>Manipulação de dados para a Correlação</h1>
+<p>Vamos analisar agora a correlação entre o tamanho do genoma da bactéria e o tamanho dessas sequências encontradas.</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-7_a4f051052ad8de3da6954070381f99f5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bac_g <span class="ot">&lt;-</span> bac <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Strain, Size)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pg_g <span class="ot">&lt;-</span> phages <span class="sc">|&gt;</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(strain, t_gen)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>pg_g_sem_duplicatas <span class="ot">&lt;-</span> <span class="fu">distinct</span>(pg_g)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>g_junto <span class="ot">&lt;-</span> <span class="fu">merge</span>(bac_g, pg_g_sem_duplicatas, <span class="at">by =</span> <span class="st">"strain"</span>, <span class="st">"Strain"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>t_gen_numeric <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(g_junto<span class="sc">$</span>t_gen)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>size_numeric <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(g_junto<span class="sc">$</span>Size)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>gcor <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(size_numeric, t_gen_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="correlação-de-pearson" class="level1">
+<h1>Correlação de Pearson</h1>
+<p>Agora eu vou calcular a correlação entre as duas variáveis Tamanho do genoma do isolado e o percentual de regiões semelhantes a profagos encontradas</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-8_c1d157fc8b7c7a561347eb80de0864bf">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(gcor<span class="sc">$</span>size_numeric, gcor<span class="sc">$</span>t_gen_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  gcor$size_numeric and gcor$t_gen_numeric
+t = 6.6272, df = 16, p-value = 5.814e-06
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.6484692 0.9452063
+sample estimates:
+      cor 
+0.8561417 </code></pre>
+</div>
+</div>
+<section id="análise-exploratória" class="level2">
+<h2 class="anchored" data-anchor-id="análise-exploratória">Análise exploratória</h2>
+</section>
+</section>
+<section id="testando-a-normalidade" class="level1">
+<h1>Testando a normalidade</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-9_d2ad5525da04120875bd6d0e059de717">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(gcor<span class="sc">$</span>t_gen_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  gcor$t_gen_numeric
+W = 0.90804, p-value = 0.07947</code></pre>
+</div>
+</div>
+<p>p-value &gt; 0.05A variável não apresentou normalidade para a variável que representa o Percentual de fagos no genoma</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-10_81b413d5cbe93188942c6aca2ce5c541">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(gcor<span class="sc">$</span>size_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  gcor$size_numeric
+W = 0.90244, p-value = 0.06337</code></pre>
+</div>
+</div>
+<p>O mesmo também foi observado para a variável tamanho do genoma dos isolados. Um p-valor &gt; 0.05. Demonstrando que os dados não apresentam normalidade.</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-11_2e429a728a5b7b4da939b24edc09dbfd">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(gcor<span class="sc">$</span>t_gen_numeric)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(gcor<span class="sc">$</span>t_gen_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-12_99b4fb9c2176e7b92cd21d289c9cf1b7">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(gcor<span class="sc">$</span>size_numeric)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(gcor<span class="sc">$</span>size_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="testanto-homocedasticidade" class="level1">
+<h1>Testanto Homocedasticidade</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-13_68342087df72a53a2358be9cd229a436">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(gcor<span class="sc">$</span>size_numeric, gcor<span class="sc">$</span>t_gen_numeric)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  gcor$size_numeric and gcor$t_gen_numeric
+F = 0.042672, num df = 17, denom df = 17, p-value = 3.009e-08
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.01596218 0.11407427
+sample estimates:
+ratio of variances 
+         0.0426717 </code></pre>
+</div>
+</div>
+<p>Ou seja, os valores apresentam heterocedasticidade.</p>
+</section>
+<section id="spearman---correlação" class="level1">
+<h1>Spearman - Correlação</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-14_265d0129c3caae1fa71540cbc38575a7">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(gcor<span class="sc">$</span>size_numeric, gcor<span class="sc">$</span>t_gen_numeric, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Spearman's rank correlation rho
+
+data:  gcor$size_numeric and gcor$t_gen_numeric
+S = 201.23, p-value = 8.855e-05
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.7923278 </code></pre>
+</div>
+</div>
+</section>
+<section id="spearman---coeficiente-de-determinação-de" class="level1">
+<h1>Spearman - Coeficiente de determinação de</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-15_0e08905f03b9bf6d29ff73a560e8c627">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.7923278</span><span class="sc">*</span><span class="fl">0.7923278</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6277833</code></pre>
+</div>
+</div>
+</section>
+<section id="regressão-linear-correlação-de-spearman" class="level1">
+<h1>Regressão linear + Correlação de Spearman</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-16_7b7bace5c5f71019d105d28aa4daee4a">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gcor <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(size_numeric, t_gen_numeric)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Genome Size (Mb)"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Prophage-like regions(%)"</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">4.8</span>, <span class="at">y =</span> <span class="dv">5</span>, <span class="at">label =</span> <span class="st">"R = 0.79</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="st">        p-value &lt; 0.01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Podemos ver que quanto maior o genoma, maior a quantidade de Prophage-like</p>
+</section>
+<section id="teste-t" class="level1">
+<h1>Teste T</h1>
+<p>Para realizar o Teste T, é preciso separar os valores em colunas diferentes.</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-17_17875679cc89634e52c16fcd7c4d5da4">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(value <span class="sc">~</span>strain <span class="sc">+</span> group, <span class="at">FUN =</span> sum) <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="dv">1</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> group,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> value)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group I</span><span class="st">`</span>, t<span class="sc">$</span><span class="st">`</span><span class="at">Group II</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  t$`Group I` and t$`Group II`
+t = -7.0217, df = 13.387, p-value = 7.712e-06
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -7.546586 -4.003414
+sample estimates:
+mean of x mean of y 
+    4.100     9.875 </code></pre>
+</div>
+</div>
+<p>O teste t é um teste paramêtrico e precisa assumir duas premícias: 1. Normalidade dos dados 2. Homocedasticidade</p>
+</section>
+<section id="homocedasticidade" class="level1">
+<h1>Homocedasticidade</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-18_fb98f70052c5adc025eb0a42f22c1bd0">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group I</span><span class="st">`</span>,t<span class="sc">$</span><span class="st">`</span><span class="at">Group II</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  t$`Group I` and t$`Group II`
+F = 0.65349, num df = 9, denom df = 7, p-value = 0.5408
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.1354883 2.7427266
+sample estimates:
+ratio of variances 
+         0.6534897 </code></pre>
+</div>
+</div>
+<p>hipotese nula é que as variancias são iguais. Então como o p-value é maior que 0.05 nós aceitamos a hipótese nula. A hipótese que as variâncias são iguais.</p>
+</section>
+<section id="testando-normalidade" class="level1">
+<h1>Testando normalidade</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-19_c002aeff3124ba64b47992b095053624">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group I</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  t$`Group I`
+W = 0.92925, p-value = 0.4406</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-20_53742bcfc446f40121b5c3a39634a7a0">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group II</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  t$`Group II`
+W = 0.72116, p-value = 0.003899</code></pre>
+</div>
+</div>
+<p>Análise visual</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-21_f7a9dae1e4e547a56a69ad9f40d9444c">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group II</span><span class="st">`</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group II</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-22_dd107ed42c691eaf983d6a8e1d5b547d">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group I</span><span class="st">`</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group I</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="teste-de-mann-whitney" class="level1">
+<h1>Teste de Mann-Whitney</h1>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-23_d16c1cb2befdc10dc20aee06b6d3bd11">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(t<span class="sc">$</span><span class="st">`</span><span class="at">Group I</span><span class="st">`</span>, t<span class="sc">$</span><span class="st">`</span><span class="at">Group II</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  t$`Group I` and t$`Group II`
+W = 1, p-value = 0.0004598
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p>Então, segundo o teste de Mann-Whitney, o valor de p é menor que 0.05, logo, se rejeita a hipótese nula. A hipótese de que eles são iguais.</p>
+<div class="cell" data-hash="Projeto_cache/html/unnamed-chunk-24_ada2d563267526d6c69fe19577b7151e">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Esse é o cóodigo para o gráfico top que eu quero</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(value <span class="sc">~</span>strain <span class="sc">+</span> group, <span class="at">FUN =</span> sum) <span class="sc">|&gt;</span> </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">phage_mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">phage_sd =</span> <span class="fu">sd</span>(value)) <span class="sc">|&gt;</span> </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, phage_mean, <span class="at">fill =</span> group)) <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.3</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> phage_mean <span class="sc">-</span> phage_sd,       </span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax =</span> phage_mean <span class="sc">+</span> phage_sd,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">width =</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Amount of Phages-like Regions"</span>) <span class="sc">+</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">" "</span>, <span class="at">fill =</span> <span class="st">"Lineage"</span>) <span class="sc">+</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'Group I'</span> <span class="ot">=</span> <span class="st">"#8494FF"</span>,</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Group II'</span> <span class="ot">=</span> <span class="st">"#FF9966"</span>)) <span class="sc">+</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fl">10.5</span>, <span class="at">label =</span> <span class="st">"W = 1</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="st">     p-value &lt; 0.01"</span>) <span class="sc">+</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Projeto_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

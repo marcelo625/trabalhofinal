@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "PROJETO_WEB",
+    "section": "",
+    "text": "Elementos semelhantes a Profagos guiam a evolução de Acidovorax citrulli em Duas linhagens distintas\n\nPhaster\n\nClassificação de Integridade\nIncompleto\nQuestionável\nIntacto"
+  },
+  {
+    "objectID": "Projeto.html",
+    "href": "Projeto.html",
+    "title": "Projeto Acidovorax Phage",
+    "section": "",
+    "text": "Primeiro vamos carregar todas as bibliotecas que vamos usar nesse trabalho\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(report)\nlibrary(DHARMa)\n\nVamos criar um gráfico de barras empilhado para demonstrar a detecção de profagos em cada isolado e a sua classificação de integridade.\nAqui, nós vamos carregar um data frame e vamos chamá-lo de df1. E logo após, nós vamos editar uma tabela do formato larga para o formato longo. Assim, juntando as variáveis Intact, questionable e incoomplete em uma única variável chamada classification\n\nclassification <- read_excel(\"Dataset_Acc.xlsx\", \"classification\")\ndf <- classification |> \n  pivot_longer(\n    cols = intact:incomplete,\n    names_to = \"classification\",\n    values_to = \"value\"\n  )\n\nstacked_bar\n\n#Aqui eu vou definir manualmente a ordem dos isolados que eu quero que apareça\ndf$strain <- factor(df$strain, levels = c(\"ZJU110\", \"M6\", \"DSM 17060\", \"NWB SC107\", \"NWB SC196\",\"HPP21-3-3B\", \"HPP21-9-4B\",  \"pslb65\", \"CCRM AcMP2\", \"tw6\", \"AAC00-1 #5593\", \"AAC00-1 #5596\", \"AAC00-1 #5684\", \"AAC00-1\", \"KACC17005\", \"T1\", \"NWB SC074\", \"EP\"))\n\n#Converter a coluna \"classification\" em uma variável nessa ordem específica\ndf$classification <- factor(df$classification, levels = c(\"incomplete\", \"questionable\", \"intact\"))\n\n#Agora vou criar um gráfico de barras empilhadas\n\ndf |> \n  ggplot(aes(fill = classification, y = strain, x = value)) +\n   geom_bar(position=\"stack\", stat=\"identity\") +\n  labs(fill = \"Integrity\") +\n  labs(y = \" \", x = \"Number of Prophage-like Region per Genome\") +\n  scale_fill_manual(values = c(incomplete = \"#F8766D\", questionable = \"#8494FF\", intact = \"#00BE67\")) +\n  theme_minimal() +\n  scale_x_continuous(limits = c(0,15))"
+  },
+  {
+    "objectID": "Projeto.html#histograma-de-distribuição",
+    "href": "Projeto.html#histograma-de-distribuição",
+    "title": "Projeto Acidovorax Phage",
+    "section": "Histograma de distribuição",
+    "text": "Histograma de distribuição\n\n#Algum problema ocorreu e o dataframe mostra que a variável size_phage que representa o tamanho dessas sequências não eram valores numéricos. Então eu usei a função as.numeric para torná-la numérica.\n\nphages$size_phage <- as.numeric(phages$size_phage)\n\n\n\np_szclass <- phages |> \n  select(size_phage, classification)\n\np_szclass |> \n  ggplot(aes(size_phage)) + \n  geom_histogram(fill = \"#8494FF\")+\n  theme_minimal() +\n  labs(fill = \"Classification\") +\n  labs(y = \"Number of Prophage-like elements\", x = \"Size of prophage-like elements (Kb)\")"
+  },
+  {
+    "objectID": "Projeto.html#influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli",
+    "href": "Projeto.html#influência-de-profagos-na-evolução-do-genoma-de-acidovorax-citrulli",
+    "title": "Projeto Acidovorax Phage",
+    "section": "Influência de profagos na evolução do genoma de Acidovorax citrulli",
+    "text": "Influência de profagos na evolução do genoma de Acidovorax citrulli"
+  },
+  {
+    "objectID": "Projeto.html#análise-exploratória",
+    "href": "Projeto.html#análise-exploratória",
+    "title": "Projeto Acidovorax Phage",
+    "section": "Análise exploratória",
+    "text": "Análise exploratória"
+  }
+]
